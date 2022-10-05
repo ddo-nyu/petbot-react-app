@@ -1,22 +1,21 @@
 import './App.css';
 import {Canvas} from "@react-three/fiber";
-import {OrbitControls, OrthographicCamera, PerspectiveCamera} from '@react-three/drei';
+import {OrbitControls, OrthographicCamera} from '@react-three/drei';
 import {Suspense, useEffect, useRef, useState} from 'react';
 import AnimatedText from "./components/AnimatedText";
 import {getProject} from "@theatre/core";
 import studio from "@theatre/studio";
 import extension from '@theatre/r3f/dist/extension';
-import { editable as e, SheetProvider } from '@theatre/r3f';
+import {editable as e, SheetProvider} from '@theatre/r3f';
 import state from './state.json';
 import Character from "./components/Character";
 import useSpline from "@splinetool/r3f-spline";
 import Button from "./components/Button";
 import ThoughtBubble from "./components/ThoughtBubble";
-import Dog from "./components/Dog";
 import Tile from "./components/Tile";
 
 const textSheet = getProject('Petbot', {state}).sheet('Text Sheet');
-const characterSheet = getProject('Petbot', {state} ).sheet('Sheet 1');
+const characterSheet = getProject('Petbot', {state}).sheet('Sheet 1');
 
 if (process.env.NODE_ENV === 'development') {
     studio.initialize()
@@ -29,8 +28,8 @@ const filterPets = (type, data) => {
 
 function App() {
     const inputRef = useRef();
-    const orthoCameraRef = useRef();
-    const { nodes, materials } = useSpline('https://prod.spline.design/alAuVKXsK9bMxIgz/scene.splinecode');
+    // const orthoCameraRef = useRef();
+    const {nodes, materials} = useSpline('https://prod.spline.design/alAuVKXsK9bMxIgz/scene.splinecode');
     // console.log(nodes);
     // console.log(materials);
 
@@ -39,10 +38,10 @@ function App() {
 
     // Set up camera controls for theatrejs
     const [orthoCamera, setOrthoCamera] = useState(null);
-    const [cameraPosition, setCameraPosition ] = useState([-71.5, 275.2, 998.02]);
+    const [cameraPosition, setCameraPosition] = useState([-71.5, 275.2, 998.02]);
     const [cameraRotation, setCameraRotation] = useState([-0.2, -0.08, -0.01]);
     const [cameraZoom, setCameraZoom] = useState(0.8);
-    const [cameraFov, setCameraFov] = useState(75);
+    const [cameraFov] = useState(75);
 
     const [userName, setUserName] = useState('');
     const [showThoughtBubble, setShowThoughtBubble] = useState(false);
@@ -81,7 +80,7 @@ function App() {
 
                 await textSheet.sequence.play({iterationCount: 1, range: [0, 0.1]});
                 inputRef.current?.setAttribute('disabled', true);
-                await characterSheet.sequence.play({ iterationCount: 1, range: [1, 2] });
+                await characterSheet.sequence.play({iterationCount: 1, range: [1, 2]});
                 setShowText4(true);
                 setSceneIndex(2);
             }
@@ -89,7 +88,7 @@ function App() {
         {
             name: 'Question 1: Are you looking for a new friend?',
             play: async () => {
-                await characterSheet.sequence.play({ iterationCount: 1, range: [2, 3] });
+                await characterSheet.sequence.play({iterationCount: 1, range: [2, 3]});
                 setShowText5(true);
                 setShowButton(true);
             }
@@ -99,7 +98,7 @@ function App() {
             play: async () => {
                 await setShowButton(false);
                 await textSheet.sequence.play({iterationCount: 1, range: [1, 1.3]});
-                await characterSheet.sequence.play({ iterationCount: 1, range: [6, 8.5]});
+                await characterSheet.sequence.play({iterationCount: 1, range: [6, 8.5]});
                 setSceneIndex(5);
             }
         },
@@ -132,7 +131,7 @@ function App() {
                 await textSheet.sequence.play({iterationCount: 1, range: [2, 4]});
                 await setShowThoughtBubble(false);
 
-                await characterSheet.sequence.play({ iterationCount: 1, range: [4, 5]});
+                await characterSheet.sequence.play({iterationCount: 1, range: [4, 5]});
 
                 await setShowText8(false);
                 await setShowText10(true);
@@ -153,7 +152,7 @@ function App() {
                 await textSheet.sequence.play({iterationCount: 1, range: [2, 4]});
                 await setShowThoughtBubble(false);
 
-                await characterSheet.sequence.play({ iterationCount: 1, range: [4, 5]});
+                await characterSheet.sequence.play({iterationCount: 1, range: [4, 5]});
 
                 await setShowText9(false);
                 await setShowText10(true);
@@ -167,11 +166,11 @@ function App() {
         const pets = filterPets(filterType, petData);
         const maxRadius = 500;
         return pets.map((p, i) => {
-            const angle = i * ( 2 * Math.PI / pets.length );
-            const x = ( maxRadius ) * Math.cos( angle );
-            const y = ( maxRadius ) * Math.sin( angle );
+            const angle = i * (2 * Math.PI / pets.length);
+            const x = (maxRadius) * Math.cos(angle);
+            const y = (maxRadius) * Math.sin(angle);
             return <Tile tKey={`Pet Tile ${i}`} nodes={nodes} materials={materials}
-                         position={[x, 600, y]} rotation={[0,x,0]} imageUrl={p.pic_url}
+                         position={[x, 600, y]} rotation={[0, x, 0]} imageUrl={p.pic_url}
                          onClick={() => setSelectedPet(p)}
             />;
         });
@@ -202,7 +201,7 @@ function App() {
 
     useEffect(() => {
         if (petTiles.length > 0) {
-            textSheet.sequence.play({ iterationCount: Infinity, range: [6, 18]});
+            textSheet.sequence.play({iterationCount: Infinity, range: [6, 18]});
         }
     }, [petTiles]);
 
@@ -228,8 +227,8 @@ function App() {
                         zoom={cameraZoom}
                         fov={cameraFov}
                     />
-                    <OrbitControls />
-                    <color attach="background" args={['#feeaea']} />
+                    <OrbitControls/>
+                    <color attach="background" args={['#feeaea']}/>
                     <directionalLight
                         name="Directional Light"
                         intensity={0.7}
@@ -253,65 +252,77 @@ function App() {
                         rotation={[-Math.PI / 2, 0, 0]}
                     />
 
-                    <hemisphereLight name="Default Ambient Light" intensity={0.75} color="#eaeaea" position={[0, 1, 0]} />
-                    <e.group theatreKey="Character Wrapper" name="Character Wrapper" position={[0,40,0]} rotation={[0, -0.1, -0.01]}>
+                    <hemisphereLight name="Default Ambient Light" intensity={0.75} color="#eaeaea"
+                                     position={[0, 1, 0]}/>
+                    <e.group theatreKey="Character Wrapper" name="Character Wrapper" position={[0, 40, 0]}
+                             rotation={[0, -0.1, -0.01]}>
                         <Character
                             theatreKey="Character"
                             nodes={nodes}
                             materials={materials}
-                            position={[0,0,0]}
+                            position={[0, 0, 0]}
                         />
                     </e.group>
-
-                    {/*<Dog nodes={nodes} materials={materials} position={[0,0,0]} />*/}
                 </SheetProvider>
                 <SheetProvider sheet={textSheet}>
-                    {showText1 && <AnimatedText tKey="Text 1" position={[400, 400, 0]} content="Hey I'm Petbot! What's your name?" />}
-                    {showText2 && <AnimatedText tKey="Text 2" position={[400, 300, 0]} content="Type your name and press Enter..." fontSize={25} textAlign="center" opacity={0.5} onClick={() => inputRef.current.focus()}/>}
+                    {showText1 && <AnimatedText tKey="Text 1" position={[400, 400, 0]}
+                                                content="Hey I'm Petbot! What's your name?"/>}
+                    {showText2 &&
+                        <AnimatedText tKey="Text 2" position={[400, 300, 0]} content="Type your name and press Enter..."
+                                      fontSize={25} textAlign="center" opacity={0.5}
+                                      onClick={() => inputRef.current.focus()}/>}
                     {showText3 && <AnimatedText tKey="Text 3" position={[400, 220, 0]} content={userName}/>}
                     {showText4 && <AnimatedText tKey="Text 4" position={[400, 400, 0]} content={`Hi ${userName}!`}/>}
-                    {showText5 && <AnimatedText tKey="Text 5" position={[400, 300, 0]} content="Is it true you're looking for a new friend?" />}
-                    {showText6 && <AnimatedText tKey="Text 6" position={[400, 300, 0]} content="Then why are you here?" />}
-                    {showText7 && <AnimatedText tKey="Text 7" position={[400, 300, 0]} content="Ok! What kind of pet are you looking for?" />}
-                    {showText8 && <AnimatedText tKey="Text 8" position={[400, 300, 0]} content="Yes! Cats are awesome. Let me find some for you..." maxWidth={400}/>}
-                    {showText9 && <AnimatedText tKey="Text 9" position={[400, 300, 0]} content="So you're a dog person? Let me find some for you..." maxWidth={400}/>}
-                    {showText10 && <AnimatedText tKey="Text 10" position={[400, 300, 0]} content="Here are all the pets available for adoption. Choose a pet and I'll tell you more about them!" />}
+                    {showText5 && <AnimatedText tKey="Text 5" position={[400, 300, 0]}
+                                                content="Is it true you're looking for a new friend?"/>}
+                    {showText6 &&
+                        <AnimatedText tKey="Text 6" position={[400, 300, 0]} content="Then why are you here?"/>}
+                    {showText7 && <AnimatedText tKey="Text 7" position={[400, 300, 0]}
+                                                content="Ok! What kind of pet are you looking for?"/>}
+                    {showText8 && <AnimatedText tKey="Text 8" position={[400, 300, 0]}
+                                                content="Yes! Cats are awesome. Let me find some for you..."
+                                                maxWidth={400}/>}
+                    {showText9 && <AnimatedText tKey="Text 9" position={[400, 300, 0]}
+                                                content="So you're a dog person? Let me find some for you..."
+                                                maxWidth={400}/>}
+                    {showText10 && <AnimatedText tKey="Text 10" position={[400, 300, 0]}
+                                                 content="Here are all the pets available for adoption. Choose a pet and I'll tell you more about them!"/>}
 
+                    {showButton &&
+                        <Button tKey="Yes button" geometry={nodes['Green Button'].geometry} material={materials.Button}
+                                position={[350, 150, 0]} label={"Yes, I am!"} onClick={() => setSceneIndex(3)}/>}
+                    {showButton && <Button tKey="No button" geometry={nodes['Red Button'].geometry}
+                                           material={materials['Red Button']} position={[500, 150, 0]} label={"Hell no"}
+                                           onClick={() => setSceneIndex(4)}/>}
 
-                    {/*{selectedPet && <AnimatedText tKey="Selected Pet text" position={[400, 300, 0]} content={selectedPet} maxWidth={400}/>}*/}
+                    {showButton2 &&
+                        <Button tKey="Cat button" geometry={nodes['Red Button'].geometry} material={materials.White}
+                                position={[350, 150, 0]} label={"Cats"} onClick={() => setSceneIndex(6)}/>}
+                    {showButton2 &&
+                        <Button tKey="Dog button" geometry={nodes['Red Button'].geometry} material={materials.White}
+                                position={[500, 150, 0]} label={"Dogs"} onClick={() => setSceneIndex(7)}/>}
 
-                    {showButton && <Button tKey="Yes button" geometry={nodes['Green Button'].geometry} material={materials.Button} position={[350, 150, 0]} label={"Yes, I am!"} onClick={() => setSceneIndex(3)}/>}
-                    {showButton && <Button tKey="No button" geometry={nodes['Red Button'].geometry} material={materials['Red Button']} position={[500, 150, 0]} label={"Hell no"} onClick={() => setSceneIndex(4)}/>}
-
-                    {showButton2 && <Button tKey="Cat button" geometry={nodes['Red Button'].geometry} material={materials.White} position={[350, 150, 0]} label={"Cats"} onClick={() => setSceneIndex(6)}/>}
-                    {showButton2 && <Button tKey="Dog button" geometry={nodes['Red Button'].geometry} material={materials.White} position={[500, 150, 0]} label={"Dogs"} onClick={() => setSceneIndex(7)}/>}
-                    {/*{showButton2 && <Button tKey="Both button" geometry={nodes['Red Button'].geometry} material={materials.White} position={[600, 150, 0]} label={"Both"} onClick={() => setSceneIndex(8)}/>}*/}
-
-                    {showThoughtBubble && <ThoughtBubble nodes={nodes} materials={materials} position={[0, 450, 0]} />}
+                    {showThoughtBubble && <ThoughtBubble nodes={nodes} materials={materials} position={[0, 450, 0]}/>}
 
                     <e.group theatreKey="Pet Cubes">
                         {petTiles}
                     </e.group>
                 </SheetProvider>
-                {/*<SheetProvider sheet={petSheet}>*/}
-                {/*    <e.group theatreKey="Pet Cubes">*/}
-                {/*        {petTiles}*/}
-                {/*    </e.group>*/}
-                {/*</SheetProvider>*/}
             </Canvas>
             <form onSubmit={(e) => {
                 e.preventDefault();
                 setSceneIndex(1);
             }}>
-                <input ref={inputRef} type="text" placeholder="Enter text" onChange={(event) => setUserName(event.target.value)}/>
+                <input ref={inputRef} type="text" placeholder="Enter text"
+                       onChange={(event) => setUserName(event.target.value)}/>
             </form>
-            { (selectedPet !== null) && <div className="popup">
+            {(selectedPet !== null) && <div className="popup">
                 <div className="content">
-                    <img src={selectedPet.pic_url} alt="pet image"/>
+                    <img src={selectedPet.pic_url} alt="pet"/>
                     <div>
                         <h2>{selectedPet.name}</h2>
                         <h3>Age: {selectedPet.age}</h3>
-                        <p dangerouslySetInnerHTML={{ __html: selectedPet.desc }}></p>
+                        <p dangerouslySetInnerHTML={{__html: selectedPet.desc}}></p>
                     </div>
                     <div className="close-button" onClick={() => setSelectedPet(null)}>
                         X
