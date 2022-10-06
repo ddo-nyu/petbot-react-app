@@ -28,10 +28,7 @@ const filterPets = (type, data) => {
 
 function App() {
     const inputRef = useRef();
-    // const orthoCameraRef = useRef();
     const {nodes, materials} = useSpline('https://prod.spline.design/alAuVKXsK9bMxIgz/scene.splinecode');
-    // console.log(nodes);
-    // console.log(materials);
 
     const [petData, setPetData] = useState(null);
     const [petTiles, setPetTiles] = useState([]);
@@ -187,6 +184,12 @@ function App() {
             zoom: cameraZoom,
         });
         setOrthoCamera(cam);
+
+        document.addEventListener("keydown", () => {
+            if(inputRef.current.getAttribute('disabled') !== true) {
+                inputRef.current?.focus();
+            }
+        });
     }, []);
 
     useEffect(() => {
@@ -322,6 +325,7 @@ function App() {
                     <div>
                         <h2>{selectedPet.name}</h2>
                         <h3>Age: {selectedPet.age}</h3>
+                        <h3>Shelter: {selectedPet.center.name}</h3>
                         <p dangerouslySetInnerHTML={{__html: selectedPet.desc}}></p>
                     </div>
                     <div className="close-button" onClick={() => setSelectedPet(null)}>
