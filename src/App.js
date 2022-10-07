@@ -12,7 +12,7 @@ import Character from "./components/Character";
 import useSpline from "@splinetool/r3f-spline";
 import Button from "./components/Button";
 import ThoughtBubble from "./components/ThoughtBubble";
-import Tile from "./components/Tile";
+import Cube from "./components/Cube";
 
 const textSheet = getProject('Petbot', {state}).sheet('Text Sheet');
 const characterSheet = getProject('Petbot', {state}).sheet('Sheet 1');
@@ -166,7 +166,7 @@ function App() {
             const angle = i * (2 * Math.PI / pets.length);
             const x = (maxRadius) * Math.cos(angle);
             const y = (maxRadius) * Math.sin(angle);
-            return <Tile tKey={`Pet Tile ${i}`} nodes={nodes} materials={materials}
+            return <Cube tKey={`Pet Tile ${i}`} nodes={nodes} materials={materials}
                          position={[x, 600, y]} rotation={[0, x, 0]} imageUrl={p.pic_url}
                          onClick={() => setSelectedPet(p)}
             />;
@@ -333,9 +333,6 @@ function App() {
                     </div>
                 </div>
             </div>}
-            {/*<div className="frame">*/}
-            {/*    <h1>Petbot</h1>*/}
-            {/*</div>*/}
         </Suspense>
     );
 }

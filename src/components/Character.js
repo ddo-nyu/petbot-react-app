@@ -3,7 +3,6 @@ import {useLerpedMouse} from "../hooks";
 import {useFrame} from "@react-three/fiber";
 import { editable as e } from '@theatre/r3f';
 
-
 export default function Character({nodes, materials, onClick}) {
     const leftArm = useRef();
     const sceneContent = useRef();

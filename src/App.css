@@ -1,3 +1,17 @@
+@font-face {
+  font-family: Winkle;
+  src: url('./Winkle-Regular.ttf');
+}
+
+body {
+  background: #FFD2D2;
+}
+
+#root {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -81,25 +95,4 @@ input {
   right: 0;
   margin: 20px;
   cursor: pointer;
-}
-
-.frame {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: calc(100% - 40px);
-  height: calc(100% - 40px);
-  margin: 20px;
-  box-sizing: border-box;
-  border: 2px solid #40075F;
-  border-radius: 15px;
-}
-
-.frame h1 {
-  background: #40075F;
-  margin: 0;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  padding: 10px 20px;
-  color: white;
 }
