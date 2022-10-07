@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Petbot
+![Tux, the Linux mascot](assets/petbot_final.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A project for Connections Lab (Fall '22) at NYU Tisch IMA Low Res. 
 
-## Available Scripts
+## Key concept(s) and/or intention(s) driving the project. Include any noteworthy inspirations or influences
 
-In the project directory, you can run:
+There are multiple intentions of this project, which include:
 
-### `npm start`
+1. Creating a 3D interface: Typically, 3D graphics has been used for either for video games, or for pure decoration. For this project, I wanted to experiment with the idea of creating a 3D interface that was somewhere in between the two typical use cases. I wanted to brainstorm a possible use case of how 3D could be used in the web as the next evolution of UI. 
+2. Characterize a chat bot: I wanted to make talking to chat bots a little more personal by adding an animated character to it and make them feel more tangible.  
+3. Learn & Practice 3D modeling and ThreeJS: I have taken some online courses for ThreeJS but have not applied the skills to any projects yet. I wanted to get more practice with it and explore how they can be interactive. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Production decisions (i.e. technical, design, creative, etc.)
+### Technical decisions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To build the initial 3D model of Petbot, I used Spline, which is a newer 3D modeling tool that has code exports. The application is built using React, ThreeJS, and React Three Fiber. To create the animations, I used mostly TheatreJS, which is a library commonly used to create animation sequences for ThreeJS objects. 
 
-### `npm test`
+### Design decisions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Tux, the Linux mascot](assets/petbot_1.png)
+![Tux, the Linux mascot](assets/petbot_2.png)
+![Tux, the Linux mascot](assets/petbot_3.png)
 
-### `npm run build`
+Initial Figma designs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I enabled the Orbit Controls included in ThreeJs to allow users to drag the camera's point of view around to showcase the 3D visuals. Initially, I had designed the text and buttons to be flat elements on the screen, but ultimately I decided that 3D text would make it feel more immersive. The decision to list the available pets as cubes was also to create a more unique experience.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Creative decisions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+When interacting with Petbot, I wanted user to feel excited and happy, since the idea is around pets. Inherently, I think that 3D visuals already creates an atmosphere of playfulness, and I chose the pink color scheme and font style to further encourage the fun atmosphere.
 
-### `npm run eject`
+## Major challenges and solutions (i.e. the most difficult aspects of the project for you and how you attempted to address them)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Some major challenges began at a technical level. I used Spline to create the initial Petbot model, but it was only exportable to a React Three Fiber component. Setting up a R3F app was challenging, as there was limited documentation and issues with certain versions of NodeJS. Exporting the models as code was also buggy, and required a lot manual updating in the component. The next major challenge was animating the character. I used TheatreJS which is a javascript animation library with a professional motion design toolset. While there was documentation to hook up TheatreJS to R3F, there was a lot of assumptions that needed to be made when making objects editable with the toolset. However, after setup of the components with the tools, creating the actual experience was much easier.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Lessons learned as well as potential next steps if work on the project continues
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+A lesson learned during this project is that ThreeJS is powerful, but the tools around it are still limiting and buggy. Another lesson is learning the differences between 2D and 3D experiences on the web. It was interesting to apply the flat UI elements were are accustomed to on websites, and apply it in a 3D space. If I were to continue on this project, I would like to create a longer conversation between Petbot and the user before showing the list of pets. This way, it would create a more personal relationship for the user. I would also like to add more drag and drop functionality to create more fun and immersive interactions. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Any relevant references/resources
 
-## Learn More
+Spline (https://spline.design/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+React Three Fiber (https://docs.pmnd.rs/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+TheatreJS (https://www.theatrejs.com/)
 
-### Code Splitting
+Adopt-a-pet API (https://www.adoptapet.com/public/apis/pet_list.html) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Link to the project (Github Pages)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+https://ddo-nyu.github.io/petbot-react-app/
 
-### Making a Progressive Web App
+## Link to the project code (GitHub repo)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://github.com/ddo-nyu/petbot-react-app
